@@ -71,7 +71,7 @@ char	*get_next_line(int fd)
 	char		*line_res;
 	static char	*buffer = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
 		return (NULL);
 	read_buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!(read_buffer))
