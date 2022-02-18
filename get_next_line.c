@@ -12,15 +12,6 @@
 
 #include "get_next_line.h"
 
-/*void	free_null(char **ptr)
-{
-	if (*ptr != NULL)
-	{
-		free(*ptr);
-		ptr = NULL;
-	}
-}*/
-
 char	*ft_left_buffer(int nl_position, char **buffer)
 {
 	char	*res;
@@ -40,7 +31,7 @@ char	*ft_left_buffer(int nl_position, char **buffer)
 		return (res);
 	}
 	tmp = ft_substr(*buffer, nl_position, BUFFER_SIZE);
-	if (tmp == NULL)
+	if (!(tmp))
 		return (NULL);
 	res = *buffer;
 	res[nl_position] = '\0';
