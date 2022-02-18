@@ -40,6 +40,8 @@ char	*ft_left_buffer(int nl_position, char **buffer)
 		return (res);
 	}
 	tmp = ft_substr(*buffer, nl_position, BUFFER_SIZE);
+	if (tmp == NULL)
+		return (NULL);
 	res = *buffer;
 	res[nl_position] = '\0';
 	*buffer = tmp;
@@ -62,6 +64,8 @@ char	*ft_read_line(int fd, char **buffer, char *read_buffer)
 			return (ft_left_buffer(char_count, buffer));
 		read_buffer[char_count] = '\0';
 		tmp = ft_strjoin(*buffer, read_buffer);
+		if (!(tmp))
+			return (NULL);
 		if (*buffer != NULL)
 			free(*buffer);
 		*buffer = tmp;
@@ -79,13 +83,16 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	read_buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (read_buffer == NULL)
+	if (!(read_buffer))
 		return (NULL);
 	if (!buffer)
 	{
 		buffer = ft_strdup("");
-		if (buffer == NULL)
+		if (!(buffer))
+		{
+			free(read_buffer);
 			return (NULL);
+		}
 	}
 	line_res = ft_read_line(fd, &buffer, read_buffer);
 	free(read_buffer);
